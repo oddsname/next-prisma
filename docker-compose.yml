@@ -1,0 +1,20 @@
+version: '3.9'  # You can use a different version if needed
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql  # Give your container a name
+    restart: always  # Automatically restart the container if it stops
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Change this to your desired root password
+      MYSQL_DATABASE: competitions      # Change this to your desired database name
+      MYSQL_USER: user             # Change this to your desired MySQL user
+      MYSQL_PASSWORD: user     # Change this to your desired MySQL user's password
+    ports:
+      - "3306:3306"  # Map host port 3306 to container port 3306 (MySQL default port)
+    volumes:
+      - mysql_data:/var/lib/mysql   # Persist MySQL data outside the container
+    # You can add more configurations like networking, etc., as needed
+
+volumes:
+  mysql_data:  # Define a named volume for persisting MySQL data
