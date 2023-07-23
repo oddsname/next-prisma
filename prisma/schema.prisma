@@ -9,3 +9,27 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Image {
+  id Int @id @default(autoincrement())
+  name String
+  path String
+  extension String
+  type String
+}
+
+model Competition {
+  id Int @id @default(autoincrement())
+  name String
+  type String
+  description String @db.Text
+  forms CompetitionForm[]
+}
+
+model CompetitionForm {
+  id Int @id @default(autoincrement())
+  type String
+  competition Competition @relation(fields: [competition_id], references: [id])
+  competition_id Int 
+}
+
