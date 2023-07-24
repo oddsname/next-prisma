@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --network-white: #f5eee7;
+  --network-black: #0c0b0b;
+  --network-brown: #5c4a08;
+  --network-dark-yellow: #ac8905;
+  --network-yellow: #fcc902;
+
+  --bloghub-dark: #001c42;
+  --bloghub-orange-1: #ff8100;
+  --bloghub-orange-2: #da7209;
+  --bloghub-orange-3: #b66412;
+  --bloghub-orange-4: #91551c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: var(--network-black)
+}
+
+.app-header {
+  background:  var(--network-white);
+  @apply py-6 shadow-neutral-100
+}
