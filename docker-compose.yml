@@ -13,7 +13,7 @@ services:
     ports:
       - "3306:3306"  # Map host port 3306 to container port 3306 (MySQL default port)
     volumes:
-      - mysql_data:/var/lib/mysql   # Persist MySQL data outside the container
+      - mysql_data:/var/utils/mysql   # Persist MySQL data outside the container
     # You can add more configurations like networking, etc., as needed
 
 volumes:

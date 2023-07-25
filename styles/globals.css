@@ -30,10 +30,24 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: var(--network-black)
+  background: var(--network-black);
+  font-family:'Courier New', Courier, monospace;
 }
 
 .app-header {
-  background:  var(--network-white);
+  background: var(--network-white);
   @apply py-6 shadow-neutral-100
+}
+
+.app-block {
+  background: var(--network-white);
+  @apply rounded-3xl px-8 py-4 w-full
+}
+
+.app-text_black {
+  color: var(--network-black);
+}
+
+h1 {
+  color: var(--network-yellow);
 }

@@ -18,18 +18,18 @@ model Image {
   type String
 }
 
-model Competition {
+model Quiz {
   id Int @id @default(autoincrement())
   name String
   type String
-  description String @db.Text
-  forms CompetitionForm[]
+  description String @db.TextInput
+  forms QuizForm[]
 }
 
-model CompetitionForm {
+model QuizForm {
   id Int @id @default(autoincrement())
   type String
-  competition Competition @relation(fields: [competition_id], references: [id])
-  competition_id Int 
+  quiz Quiz @relation(fields: [quiz_id], references: [id])
+  quiz_id Int 
 }
 
