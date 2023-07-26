@@ -16,20 +16,15 @@ model Image {
   path String
   extension String
   type String
+  quizes Quiz[]
 }
 
 model Quiz {
   id Int @id @default(autoincrement())
   name String
   type String
-  description String @db.TextInput
-  forms QuizForm[]
-}
-
-model QuizForm {
-  id Int @id @default(autoincrement())
-  type String
-  quiz Quiz @relation(fields: [quiz_id], references: [id])
-  quiz_id Int 
+  description String @db.MediumText
+  image Image @relation(fields: [image_id], references: [id])
+  image_id Int
 }
 

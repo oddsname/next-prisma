@@ -16,9 +16,7 @@ export default async function Home() {
                 </div>
 
                 <div className="mt-4">
-                    <QuizList
-
-                    />
+                    <QuizList/>
                 </div>
             </Block>
         </>

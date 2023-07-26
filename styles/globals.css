@@ -30,8 +30,8 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: var(--network-black);
   font-family:'Courier New', Courier, monospace;
+  background: url("/bg-img.jpg");
 }
 
 .app-header {
@@ -48,6 +48,34 @@ body {
   color: var(--network-black);
 }
 
+.btn-dark-yellow {
+  background: var(--network-dark-yellow);
+}
+
+.btn-yellow {
+  background: var(--network-yellow);
+}
+
+.app-btn {
+  font-size: 20px;
+  border: 1px solid var(--network-yellow);
+  font-weight: 800;
+  @apply font-bold px-4 rounded-full text-gray-700
+}
+
+.btn-yellow:hover {
+  border: 1px solid var(--network-dark-yellow);
+}
+
 h1 {
   color: var(--network-yellow);
+}
+
+.link {
+  font-size: 20px;
+  @apply font-bold
+}
+
+.link:hover {
+  @apply underline underline-offset-1
 }

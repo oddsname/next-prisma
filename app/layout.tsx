@@ -1,9 +1,9 @@
 import "@/styles/globals.css"
 import {QuizSearch} from "@/modules/Quiz";
 import {ProfilePhoto} from "@/modules/User";
-import Image from "next/image";
 import React from "react";
-import TextInput from "@/components/input/TextInput";
+import Link from "next/link";
+import Logo from "@/components/Logo";
 
 export const metadata = {
     title: 'Create Next App',
@@ -19,11 +19,18 @@ export default function RootLayout({children}: {
             <header className="app-header">
                 <div className="container mx-auto px-4">
                     <nav className="flex items-center justify-between">
-                        <div>
-                            <Image src="/ts-icon.png" alt="icon" width={185} height={50}/>
-                        </div>
 
-                        <div className="flex justify-between">
+                        <Logo url='/' />
+
+                        <div className="flex gap-8 justify-between">
+                            <Link href='/' className="link pt-3">
+                                Home
+                            </Link>
+
+                            <Link href='/quiz/create' className='link pt-3'>
+                                Create Quiz
+                            </Link>
+
                             <QuizSearch />
 
                             <ProfilePhoto />
