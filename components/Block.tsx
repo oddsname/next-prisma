@@ -1,13 +1,17 @@
 import React from "react";
 
 interface Props {
-    children: React.ReactNode
+    children: React.ReactNode,
+    className?: string,
 }
 
-const Block: React.FC<Props> = ({ children }) => {
+const Block: React.FC<Props> = ({ children, className }) => {
     return (
         <div className="app-block">
-            { children }
+            <div className={className + " w-full h-full"}>
+                { children }
+            </div>
+
         </div>
     );
 }

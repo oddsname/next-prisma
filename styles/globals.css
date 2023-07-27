@@ -41,11 +41,14 @@ body {
 
 .app-block {
   background: var(--network-white);
-  @apply rounded-3xl px-8 py-4 w-full
+  padding: 10px 24px 18px;
+  width: 100%;
+  @apply rounded-3xl
 }
 
 .app-text_black {
   color: var(--network-black);
+  font-size: 20px;
 }
 
 .btn-dark-yellow {
@@ -78,4 +81,14 @@ h1 {
 
 .link:hover {
   @apply underline underline-offset-1
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.select-option {
+  @apply p-4 m-4
 }
