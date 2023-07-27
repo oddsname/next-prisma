@@ -7,7 +7,7 @@ interface Props {
     className?: string,
     placeholder?: string,
     required?: boolean,
-    onChange?: () => void
+    onChange?: (data: any) => any
 }
  const TextInput: React.FC<Props> = (
      {required = false, placeholder = '', className = '', value = '', onChange = () => {} }
