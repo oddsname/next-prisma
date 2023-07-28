@@ -24,7 +24,7 @@ const SelectInput: React.FC<Props> = ({ options, onChange, value, className='' }
                 className={"shadow appearance-none border rounded-full w-full py-3 px-6 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"}
             >
                 {options.map((item) => {
-                    return <option value={item.key} selected={item.key === value} className='select-option'>
+                    return <option key={item.key} value={item.key} selected={item.key === value}>
                         {item.text}
                     </option>
                 })}
