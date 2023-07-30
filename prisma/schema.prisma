@@ -13,7 +13,7 @@ datasource db {
 model Image {
   id Int @id @default(autoincrement())
   name String
-  path String
+  path String @unique
   extension String
   type String
   quizes Quiz[]

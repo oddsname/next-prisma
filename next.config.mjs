@@ -1,6 +1,8 @@
 import "./lib/env.mjs";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+
+}
 
 export default nextConfig

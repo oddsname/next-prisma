@@ -7,7 +7,7 @@ import {QuizParams} from "@/modules/Quiz/interfaces/QuizParams";
 import SelectInput from "@/components/input/SelectInput";
 import Block from "@/components/Block";
 import TextareaInput from "@/components/input/TextareaInput";
-import FileLoader from "@/components/FileLoader";
+import ImageLoader from "@/components/ImageLoader";
 
 interface Props {
     quiz: QuizParams,
@@ -24,7 +24,7 @@ const QuizForm: React.FC<Props> = ({quiz, setQuiz, onSubmit}) => {
     const options = [{key: 'test', text: 'test'}, {key: 'test1', text: 'test2'}]
 
     return (
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between gap-4" style={{height: '436px'}}>
             <Block>
                 <form onSubmit={onSubmit}>
 
@@ -70,7 +70,7 @@ const QuizForm: React.FC<Props> = ({quiz, setQuiz, onSubmit}) => {
             </Block>
 
             <Block className='px-4 py-8'>
-                <FileLoader />
+                <ImageLoader />
             </Block>
         </div>
     );
