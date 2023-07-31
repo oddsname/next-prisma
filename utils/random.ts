@@ -1,4 +1,4 @@
-export const RANDOM_STR = (length: number) => {
+export const randomStr = (length: number) => {
     let result = '';
 
     const characters =

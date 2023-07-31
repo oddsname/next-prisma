@@ -13,6 +13,5 @@ export const GENERATE_IMAGE_PATH = (fileName: string) => {
 }
 
 export const GENERATE_IMAGE_URL = (imagePath: string) => {
-
-    return imagePath.substring(imagePath.indexOf('images'));
+    return "/" + imagePath.substring(imagePath.indexOf('images')).replaceAll('\\', '/');
 }

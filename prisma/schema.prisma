@@ -11,20 +11,20 @@ datasource db {
 }
 
 model Image {
-  id Int @id @default(autoincrement())
-  name String
-  path String @unique
+  id        Int    @id @default(autoincrement())
+  name      String
+  path      String @unique
   extension String
-  type String
-  quizes Quiz[]
+  url       String @unique
+  type      String
+  quizes    Quiz[]
 }
 
 model Quiz {
-  id Int @id @default(autoincrement())
-  name String
-  type String
+  id          Int    @id @default(autoincrement())
+  name        String
+  type        String
   description String @db.MediumText
-  image Image @relation(fields: [image_id], references: [id])
-  image_id Int
+  image       Image  @relation(fields: [image_id], references: [id])
+  image_id    Int
 }
-

@@ -1,11 +1,15 @@
-import formidable from "formidable";
-import {env} from "@/lib/env.mjs";
 import {NextRequest, NextResponse} from "next/server";
+import {AppResponse} from "@/utils/response";
+import {ImageService} from "@/modules/Image";
 
-export const POST = (req: NextRequest, res: NextResponse) => {
-    console.log(env.DATABASE_URL);
+export const POST = async (req: NextRequest, res: NextResponse) => {
+    const { id } = await req.json();
 
+    try {
+        await ImageService.removeFile(id);
 
-
-    return new Response('test');
+        return AppResponse.json({ success: true });
+    } catch (e: any) {
+        return AppResponse.json({ success: false, message: e.message });
+    }
 }
