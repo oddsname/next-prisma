@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {randomStr} from "@/utils/random";
-import {ImageService} from "@/modules/Image";
+import {ImageService} from "@/modules/Image/server";
 import {AppResponse} from "@/utils/response";
 
 export const POST = async (req: NextRequest) => {

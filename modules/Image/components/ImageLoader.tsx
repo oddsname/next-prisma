@@ -8,50 +8,41 @@ import Image from "next/image"
 interface Props {
     value?: string
     className?: string,
-    placeholder?: string,
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any
+    onChange?: (file: File) => void|any,
+    onDelete?: (img: ImgParams) => Promise<{ success: boolean }>
+    img: ImgParams,
+    setImg: (img: ImgParams) => void|any,
+    preview?: boolean,
 }
 
-interface Img {
+export interface ImgParams {
     url?: string,
     id?: number,
 }
 
-const ImageLoader: React.FC<Props> = ({placeholder = '', className = '', value = '', onChange = () => {}}) => {
+const ImageLoader: React.FC<Props> = ({
+    img,
+    setImg, className = '',
+    value = '',
+    preview: boolean= true,
+    onDelete= async () => ({ success: true }),
+    onChange = () => {},
+}) =>
+{
     const fileRef = useRef<HTMLInputElement>(null)
-    const [userImg, setUserImg] = useState<Img>({});
     const [loading, setLoading] = useState(false);
 
-    const uploadFile = async (file: File): Promise<Img> => {
-        const formData = new FormData();
+    const previewFile = (file: File) => {
+        const reader = new FileReader();
 
-        formData.set('file', file);
-
-        try {
-            setLoading(true)
-            const response = await fetch('/api/image/upload', {
-                method: "POST",
-                body: formData,
+        reader.onload = async (e) => {
+            setImg({
+                url: reader.result as string
             });
-            setLoading(false);
-
-            return response.json();
-        } catch (e) {
-            return {};
         }
+
+        reader.readAsDataURL(file);
     }
-
-    const removeFile = async (id: number): Promise<boolean> => {
-        setLoading(true);
-        const response = await fetch('/api/image/delete', {
-            method: "POST",
-            body: JSON.stringify({ id })
-        });
-        setLoading(false);
-
-        return (await response.json()).success;
-    }
-
     const onUploadClick = () => {
         if (fileRef.current) {
             fileRef.current.click()
@@ -61,30 +52,29 @@ const ImageLoader: React.FC<Props> = ({placeholder = '', className = '', value =
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
-            const reader = new FileReader();
 
-            reader.onload = async (e) => {
-                setUserImg({
-                    url: reader.result as string
-                });
+            if(preview) {
+                previewFile(file);
             }
 
-            reader.readAsDataURL(file);
-
-            const {url, id} = await uploadFile(file);
-
-            setUserImg({url, id});
+            onChange(file);
         }
     }
 
     const onFileDelete = async () => {
-        if (userImg.id && await removeFile(userImg.id)) {
-            setUserImg({});
+        if (img.id) {
+            setLoading(true);
+
+            const { success } = await onDelete(img);
+
+            if(success) {
+                setLoading(false);
+            }
         }
     }
 
     const renderBrowseFileContent = () => {
-        if (userImg.url) {
+        if (img.url) {
             return (
                 <div className='h-full w-full'>
                     <div className='relative'>
@@ -98,7 +88,7 @@ const ImageLoader: React.FC<Props> = ({placeholder = '', className = '', value =
                     </div>
 
                     <div className='relative h-full w-auto'>
-                        { userImg.url && <Image src={userImg.url} alt='uploaded images' fill className='w-auto mx-auto'/> }
+                        { img.url && <Image src={img.url} alt='uploaded images' fill className='w-auto mx-auto'/> }
                     </div>
 
                 </div>

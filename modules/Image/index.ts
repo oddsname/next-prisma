@@ -1,5 +1,10 @@
-import { ImageService } from "@/modules/Image/server/services/ImageService";
+import ImageLoader from "@/modules/Image/components/ImageLoader";
+import { ImageApi } from "@/modules/Image/api/ImageApi";
+import { ImgParams } from "@/modules/Image/components/ImageLoader";
 
 export {
-    ImageService,
+    ImageLoader,
+    ImageApi,
+    type ImgParams
 }
+

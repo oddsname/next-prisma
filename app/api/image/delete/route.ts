@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {AppResponse} from "@/utils/response";
-import {ImageService} from "@/modules/Image";
+import {ImageService} from "@/modules/Image/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
     const { id } = await req.json();
