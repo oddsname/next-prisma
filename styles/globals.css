@@ -41,10 +41,8 @@ body {
 
 .app-block {
   background: var(--network-white);
-  padding: 10px 24px 18px;
-  width: 100%;
-  @apply rounded-3xl
 }
+
 
 .app-text_black {
   color: var(--network-black);
@@ -55,6 +53,13 @@ body {
     background: var(--network-white);
 }
 
+.bg-network-black {
+    background: var(--network-black);
+}
+
+.bg-disabled {
+  @apply bg-gray-600
+}
 
 .app-btn {
   font-size: 20px;
@@ -84,4 +89,26 @@ select {
 
 .select-option {
   @apply p-4 m-4
+}
+
+.status-bar {
+  position: relative;
+}
+
+.status-bar__line {
+    background: var(--network-white);
+    height: 2px;
+    width: 100%;
+}
+
+.status-bar__dot-block {
+  top: -19px;
+  @apply flex justify-between absolute w-full
+}
+
+.status-bar__dot {
+    border: 2px solid black;
+    width: 40px;
+    height: 40px;
+    @apply rounded-lg z-10;
 }

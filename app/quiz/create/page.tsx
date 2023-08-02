@@ -8,7 +8,6 @@ export default async function Create() {
 
     return (
         <>
-            <TextHeader>Create Quiz</TextHeader>
             <QuizCreate/>
         </>
 

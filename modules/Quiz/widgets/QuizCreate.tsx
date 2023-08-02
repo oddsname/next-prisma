@@ -1,22 +1,27 @@
 "use client"
 
 import React, {useState} from "react";
-import QuizForm from "@/modules/Quiz/components/QuizForm";
-import {QuizParams} from "@/modules/Quiz/interfaces/QuizParams";
+import StatusBar from "@/components/StatusBar";
+import QuizTypeStep from "@/modules/Quiz/components/steps/QuizTypeStep";
 
 const QuizCreate: React.FC = () => {
-    const [quiz, setQuiz] = useState({} as QuizParams)
 
-    const onSubmit = (e: React.FormEvent) => {
-
-    }
 
     return (
-        <QuizForm
-            onSubmit={onSubmit}
-            setQuiz={setQuiz}
-            quiz={quiz}
-        />
+        <div>
+
+            {/*<Block className=" px-4 pb-8 pt-9">*/}
+            <StatusBar amount={3} selected={1}/>
+            {/*</Block>*/}
+
+            <QuizTypeStep />
+
+            {/*<div className="mt-8 flex justify-between">*/}
+            {/*    <Button type="danger">Previous</Button>*/}
+            {/*    <Button type="primary">Next</Button>*/}
+            {/*</div>*/}
+
+        </div>
     );
 }
 

@@ -2,10 +2,10 @@ import React from "react";
 
 interface Props {
 }
-const QuizItem: React.FC<Props> = () => {
+const QuizCreateSteps: React.FC<Props> = () => {
     return (
       <></>
     )
 }
 
-export default QuizItem;
+export default QuizCreateSteps;
