@@ -21,10 +21,17 @@ model Image {
 }
 
 model Quiz {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  type        String
-  description String @db.MediumText
-  image       Image  @relation(fields: [image_id], references: [id])
+  description String   @db.MediumText
+  image       Image    @relation(fields: [image_id], references: [id])
   image_id    Int
+  type        QuizType @relation(fields: [type_id], references: [id])
+  type_id     Int
+}
+
+model QuizType {
+  id   Int    @id @default(autoincrement())
+  type String @unique
+  Quiz Quiz[]
 }

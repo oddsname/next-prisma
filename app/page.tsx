@@ -1,7 +1,7 @@
 import Block from '@/components/Block'
 import TextHeader from '@/components/TextHeader'
 import {prisma} from '@/prisma/prisma'
-import {QuizList, QuizSearch} from "@/modules/Quiz";
+import {QuizSearch} from "@/modules/Quiz";
 
 export default async function Home() {
     return (
@@ -16,7 +16,7 @@ export default async function Home() {
                 </div>
 
                 <div className="mt-4">
-                    <QuizList/>
+
                 </div>
             </Block>
         </>

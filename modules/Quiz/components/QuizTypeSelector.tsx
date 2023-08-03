@@ -4,39 +4,40 @@ import {QuizTypeOption} from "@/modules/Quiz/interfaces/QuizTypeOption";
 
 interface Props {
     types: QuizTypeOption[],
-    onClick: (quizType: QuizTypeOption) => void|any,
+    type: QuizTypeOption,
+    onSelect: (quizType: QuizTypeOption) => void|any,
 }
 
-const QuizTypeSelector: React.FC<Props> = ({ types, onClick}) => {
+const QuizTypeSelector: React.FC<Props> = ({type, types, onSelect}) => {
     const getTypeClass = (quizType: QuizTypeOption, index: number) => {
-        let disabledClass = quizType.disabled ? "bg-disabled" : 'hover:bg-amber-200';
+        let disabledClass = quizType.disabled ? "bg-disabled" : '';
+        let selectedClass = quizType.id === type.id ? 'border-blue-400' : 'border-transparent';
+
+        let additionalClasses = disabledClass  + ' ' + selectedClass;
 
         if (index === 0) {
-            return "rounded-t-3xl " + disabledClass
+            return "rounded-t-3xl " + additionalClasses
         }
 
         if (index === types.length - 1) {
-            return "rounded-b-3xl border-t-2 " + disabledClass
+            return "rounded-b-3xl border-t-2 " + additionalClasses
         }
 
-        return "border-t-2 " + disabledClass
+        return "border-t-2 " + additionalClasses
     }
 
-    return <Block
-        className="cursor-pointer rounded-3xl mx-auto text-center text-4xl font-bold mt-12"
-        width="50%"
-        rounded="3xl"
-    >
+
+    return <div className="rounded-3xl w-full text-center text-4xl font-bold mt-12">
         {types.map((quizType, index) =>
             <div
-                className={getTypeClass(quizType, index) + " border-black py-12"}
-                key={quizType.key}
-                onClick={() => onClick(quizType)}
+                className={getTypeClass(quizType, index) + " my-4 cursor-pointer border-2 border-black bg-amber-200 mx-auto rounded-3xl py-4 px-4 w-1/3"}
+                key={quizType.id}
+                onClick={() => onSelect(quizType)}
             >
-                {quizType.text}
+                {quizType.type}
             </div>
         )}
-    </Block>
+    </div>
 }
 
 export default QuizTypeSelector;

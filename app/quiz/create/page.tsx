@@ -1,15 +1,16 @@
-import Block from "@/components/Block";
-import TextHeader from "@/components/TextHeader";
-import Label from "@/components/Label";
-import TextInput from "@/components/input/TextInput";
 import {QuizCreate} from "@/modules/Quiz/index";
+import {prisma} from "@/prisma/prisma";
 
 export default async function Create() {
+    const quizTypes = await prisma.quizType.findMany({
+        orderBy: {id: 'asc'}
+    });
 
     return (
         <>
-            <QuizCreate/>
+            <QuizCreate
+                quizTypes={quizTypes}
+            />
         </>
-
     )
 }

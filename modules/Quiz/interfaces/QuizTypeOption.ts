@@ -1,5 +1,5 @@
 export interface QuizTypeOption {
-    key: string,
-    text: string,
+    id: number,
+    type: string,
     disabled: boolean,
 }
