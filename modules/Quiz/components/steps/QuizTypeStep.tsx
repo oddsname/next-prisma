@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import TextHeader from "@/components/TextHeader";
 import QuizTypeSelector from "@/modules/Quiz/components/QuizTypeSelector";
-import {QuizTypeOption} from "@/modules/Quiz/interfaces/QuizTypeOption";
+import {QuizTypeOption} from "@/modules/Quiz/types/QuizTypeOption";
 import {useCreateQuizStore} from "@/modules/Quiz/store/CreateQuizStore";
 
 interface Props {
@@ -32,7 +32,7 @@ const QuizTypeStep: React.FC<Props> = () => {
     }
 
     return (
-        <div className="border-r-10 mt-16">
+        <div>
             <TextHeader>Select Quiz Type</TextHeader>
 
             { renderStep() }

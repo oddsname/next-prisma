@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import Label from "@/components/Label";
 import TextInput from "@/components/input/TextInput";
-import {QuizParams} from "@/modules/Quiz/interfaces/QuizParams";
+import {QuizParams} from "@/modules/Quiz/types/QuizParams";
 import SelectInput from "@/components/input/SelectInput";
 import Block from "@/components/Block";
 import TextareaInput from "@/components/input/TextareaInput";

@@ -1,5 +1,7 @@
 import React from "react";
-import QuizTypeStep from "@/modules/Quiz/components/steps/QuizTypeStep";
+
+const QuizTypeStep = React.lazy(() => import("@/modules/Quiz/components/steps/QuizTypeStep"))
+const QuizMetaStep = React.lazy(() => import("@/modules/Quiz/components/steps/QuizMetaStep"))
 
 interface Props {
     step: number,
@@ -10,6 +12,7 @@ const QuizCreateSteps: React.FC<Props> = ({ step }) => {
     return (
         <div>
             { step === 1 && <QuizTypeStep />}
+            { step === 2 && <QuizMetaStep />}
         </div>
     )
 }

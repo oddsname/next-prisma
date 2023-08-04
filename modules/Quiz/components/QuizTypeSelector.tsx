@@ -1,6 +1,6 @@
 import React from "react";
 import Block from "@/components/Block";
-import {QuizTypeOption} from "@/modules/Quiz/interfaces/QuizTypeOption";
+import {QuizTypeOption} from "@/modules/Quiz/types/QuizTypeOption";
 
 interface Props {
     types: QuizTypeOption[],

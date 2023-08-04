@@ -6,7 +6,7 @@ interface Props {
     value?: string
     className?: string,
     placeholder?: string,
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any|void
 }
  const TextInput: React.FC<Props> = (
      { placeholder = '', className = '', value = '', onChange = () => {} }

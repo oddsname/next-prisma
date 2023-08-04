@@ -1,10 +1,10 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import StatusBar from "@/components/StatusBar";
 import Button from "@/components/Button";
 import QuizCreateSteps from "@/modules/Quiz/components/QuizCreateSteps";
-import {QuizType} from "@/modules/Quiz/interfaces/QuizType";
+import {QuizType} from "@/modules/Quiz/types/QuizType";
 import {useCreateQuizStore} from "@/modules/Quiz/store/CreateQuizStore";
 
 interface Props {
@@ -14,10 +14,10 @@ interface Props {
 const QuizCreate: React.FC<Props> = ({quizTypes}) => {
     const {setQuizTypes, setQuizType, quizType} = useCreateQuizStore();
     const [step, setStep] = useState(1);
+    const enabledTypes = ['simple'];
     const stepsAmount = 3;
-    const enabledTypes = ['simple', 'test', 'complicated'];
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setQuizTypes(quizTypes, enabledTypes);
 
         if (!quizType) {
@@ -52,11 +52,14 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
             <div className='h-full w-full'>
                 <StatusBar amount={stepsAmount} selected={step}/>
 
-                <QuizCreateSteps
-                    step={step}
-                    prevPage={onPrevPageClick}
-                    nextPage={onNextPageClick}
-                />
+
+                <div className="mt-16">
+                    <QuizCreateSteps
+                        step={step}
+                        prevPage={onPrevPageClick}
+                        nextPage={onNextPageClick}
+                    />
+                </div>
             </div>
 
             <div className="absolute bottom-16 w-4/5">

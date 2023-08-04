@@ -24,7 +24,7 @@ const ImageLoader: React.FC<Props> = ({
     img,
     setImg, className = '',
     value = '',
-    preview: boolean= true,
+    preview= true,
     onDelete= async () => ({ success: true }),
     onChange = () => {},
 }) =>
@@ -62,12 +62,13 @@ const ImageLoader: React.FC<Props> = ({
     }
 
     const onFileDelete = async () => {
-        if (img.id) {
+        if (img.url) {
             setLoading(true);
 
             const { success } = await onDelete(img);
 
             if(success) {
+                setImg({});
                 setLoading(false);
             }
         }

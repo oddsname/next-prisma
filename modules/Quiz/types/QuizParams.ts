@@ -1,7 +1,6 @@
-
-export interface QuizParams {
+export type QuizParams = {
     name?: string,
     description?: string
-    type?: string,
+    type_id?: number,
     image_id?: number
 }

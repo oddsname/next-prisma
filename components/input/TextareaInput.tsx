@@ -6,7 +6,7 @@ interface Props {
     value?: string
     className?: string,
     placeholder?: string,
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => any
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => any|void
 }
 const TextareaInput: React.FC<Props> = (
     {placeholder = '', className = '', value = '', onChange = () => {} }
