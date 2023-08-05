@@ -11,11 +11,15 @@ interface Props {
     quizTypes: QuizType[]
 }
 
+const enabledTypes = ['simple'];
+const stepsAmount = 3;
+
 const QuizCreate: React.FC<Props> = ({quizTypes}) => {
     const {setQuizTypes, setQuizType, quizType} = useCreateQuizStore();
     const [step, setStep] = useState(1);
-    const enabledTypes = ['simple'];
-    const stepsAmount = 3;
+
+    const isFirstStep = step === 1
+    const isLastStep = step === stepsAmount;
 
     useLayoutEffect(() => {
         setQuizTypes(quizTypes, enabledTypes);
@@ -43,15 +47,10 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
         setStep(step - 1);
     }
 
-    const isFirstStep = () => step === 1;
-
-    const isLastStep = () => step === 3;
-
     return (
         <div>
             <div className='h-full w-full'>
                 <StatusBar amount={stepsAmount} selected={step}/>
-
 
                 <div className="mt-16">
                     <QuizCreateSteps
@@ -65,7 +64,7 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
             <div className="absolute bottom-16 w-4/5">
                 <div className="flex justify-between">
                     <div>
-                        {!isFirstStep() && <Button type="danger" onClick={onPrevPageClick}>Previous</Button>}
+                        {!isFirstStep && <Button type="danger" onClick={onPrevPageClick}>Previous</Button>}
                     </div>
 
                     <div>
@@ -73,7 +72,7 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
                             type="primary"
                             onClick={onNextPageClick}
                         >
-                            {isLastStep() ? 'Finish' : 'Next Page'}
+                            {isLastStep ? 'Finish' : 'Next Page'}
                         </Button>
                     </div>
                 </div>

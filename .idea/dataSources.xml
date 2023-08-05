@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:mysql://aws.connect.psdb.cloud/test?ssl={&quot;rejectUnauthorized&quot;:true}</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="test@localhost" uuid="5e8a75b8-3215-4e27-8ac9-79113b0ca170">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3312/test</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

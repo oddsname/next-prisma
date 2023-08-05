@@ -8,6 +8,8 @@ import TextareaInput from "@/components/input/TextareaInput";
 import {ImageLoader, ImgParams} from "@/modules/Image";
 import Button from "@/components/Button";
 import {useCreateQuizStore} from "@/modules/Quiz/store/CreateQuizStore";
+import {maxLength, required} from "@/utils/validation/rules";
+import ErrorMessage from "@/components/ErrorMessage";
 
 interface Props {
 
@@ -16,14 +18,18 @@ interface Props {
 const QuizMetaStep: React.FC<Props> = () => {
     const { setQuiz, quiz } = useCreateQuizStore();
 
-    const nameInput = useInput<HTMLInputElement>('');
+    const nameInput = useInput<HTMLInputElement>('', [
+        required(),
+        maxLength(5)
+    ]);
+
     const descInput = useInput<HTMLTextAreaElement>('');
 
     const [img, setImg] = useState<ImgParams>({});
 
-    useEffect(() => saveQuizMeta(), [nameInput.value, descInput.value, img]);
+    useEffect(() => saveQuizMetaData(), [nameInput.value, descInput.value, img]);
 
-    const saveQuizMeta = () => {
+    const saveQuizMetaData = () => {
         setQuiz({
             name: nameInput.value,
             description: descInput.value,
@@ -52,6 +58,8 @@ const QuizMetaStep: React.FC<Props> = () => {
                             </Label>
 
                             <TextInput placeholder="Quiz Name" {...nameInput} />
+
+                            <ErrorMessage>{nameInput.error}</ErrorMessage>
                         </div>
 
 
