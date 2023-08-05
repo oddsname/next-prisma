@@ -16,7 +16,13 @@ const stepsAmount = 3;
 
 const QuizCreate: React.FC<Props> = ({quizTypes}) => {
     const {setQuizTypes, setQuizType, quizType} = useCreateQuizStore();
+
     const [step, setStep] = useState(1);
+
+    const [isNextButtonDisabled, setNextButtonDisabled] = useState(false);
+    const [isPrevButtonDisabled, setPrevButtonDisabled] = useState(false);
+
+    useEffect(() => setPrevButtonDisabled(isFirstStep),[])
 
     const isFirstStep = step === 1
     const isLastStep = step === stepsAmount;
@@ -38,12 +44,15 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
             throw new Error("No active QuizTypes found");
         }
     }
-
     const onNextPageClick = () => {
+        setNextButtonDisabled(false);
+        setPrevButtonDisabled(false);
         setStep(step + 1);
     }
 
     const onPrevPageClick = () => {
+        setNextButtonDisabled(false);
+        setPrevButtonDisabled(step === 2);
         setStep(step - 1);
     }
 
@@ -55,8 +64,8 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
                 <div className="mt-16">
                     <QuizCreateSteps
                         step={step}
-                        prevPage={onPrevPageClick}
-                        nextPage={onNextPageClick}
+                        setNextButtonDisabled={setNextButtonDisabled}
+                        setPrevButtonDisabled={setPrevButtonDisabled}
                     />
                 </div>
             </div>
@@ -64,11 +73,18 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
             <div className="absolute bottom-16 w-4/5">
                 <div className="flex justify-between">
                     <div>
-                        {!isFirstStep && <Button type="danger" onClick={onPrevPageClick}>Previous</Button>}
+                        <Button
+                            disabled={isPrevButtonDisabled}
+                            type="danger"
+                            onClick={onPrevPageClick}
+                        >
+                            Previous
+                        </Button>
                     </div>
 
                     <div>
                         <Button
+                            disabled={isNextButtonDisabled}
                             type="primary"
                             onClick={onNextPageClick}
                         >

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import React from "react";
 import {useValidation, ValidationRule} from "@/hooks/useValidation";
 
@@ -8,6 +8,10 @@ export const useInput = <T extends Elements>(defaultValue: string = '', validati
     const [value, setValue] = useState<undefined|string>(defaultValue);
     const { error, validate } = useValidation(validationRules);
 
+    useEffect(() => {
+        validate(defaultValue);
+        setValue(defaultValue);
+    },[defaultValue])
     const onChange = (e: React.ChangeEvent<T>) => {
         validate(e.target.value);
         setValue(e.target.value)

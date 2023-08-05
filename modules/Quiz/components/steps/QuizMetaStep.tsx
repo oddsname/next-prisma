@@ -12,27 +12,38 @@ import { required, maxLength } from "@/hooks/useValidation";
 import ErrorMessage from "@/components/ErrorMessage";
 
 interface Props {
-
+    setNextButtonDisabled: (value: boolean) => void,
 }
 
-const QuizMetaStep: React.FC<Props> = () => {
+const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
     const { setQuiz, quiz } = useCreateQuizStore();
 
-    const nameInput = useInput<HTMLInputElement>('', [
+    const nameInput = useInput<HTMLInputElement>(quiz.name, [
         required(),
-        maxLength(5)
+        maxLength(200)
     ]);
 
-    const descInput = useInput<HTMLTextAreaElement>('', [
+    const descInput = useInput<HTMLTextAreaElement>(quiz.description, [
         required(),
         maxLength(500),
     ]);
 
-    const [img, setImg] = useState<ImgParams>({});
+    const [img, setImg] = useState<ImgParams>({id: quiz.image_id});
 
+    useEffect(() => setNextButtonDisabled(true), [])
     useEffect(() => saveQuizMetaData(), [nameInput.value, descInput.value, img]);
 
+    const checkValidation = (): boolean => {
+        return (
+            !nameInput.error
+            && !descInput.error
+            && !!img.url
+        );
+    }
+
     const saveQuizMetaData = () => {
+        setNextButtonDisabled(!checkValidation());
+
         setQuiz({
             name: nameInput.value,
             description: descInput.value,
