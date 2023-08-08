@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {useRef} from "react";
 import {BsX} from "@react-icons/all-files/bs/BsX";
 import Image from "next/image"
+import Loader from "@/components/Loader";
 
 interface Props {
     value?: string
@@ -57,7 +58,9 @@ const ImageLoader: React.FC<Props> = ({
                 previewFile(file);
             }
 
-            onChange(file);
+            setLoading(true);
+            await onChange(file);
+            setLoading(false);
         }
     }
 
@@ -78,20 +81,16 @@ const ImageLoader: React.FC<Props> = ({
         if (img.url) {
             return (
                 <div className='h-full w-full'>
-                    <div className='relative'>
-                        <div className="z-10 absolute bg-gray-400 h-14 w-full opacity-25"></div>
-
-                        {
-                            !loading && <div  className="z-10 absolute w-6 top-1 right-10 text-red-700" onClick={onFileDelete}>
+                        <div className='relative'>
+                            <div className="z-10 absolute bg-gray-400 h-14 w-full opacity-25"></div>
+                            <div  className="z-10 absolute w-6 top-1 right-10 text-red-700" onClick={onFileDelete}>
                                 <BsX/>
                             </div>
-                        }
-                    </div>
+                        </div>
 
-                    <div className='relative h-full w-auto'>
-                        { img.url && <Image src={img.url} alt='uploaded images' fill className='w-auto mx-auto'/> }
-                    </div>
-
+                        <div className='relative h-full w-auto'>
+                            { img.url && <Image src={img.url} alt='uploaded images' fill className='w-auto mx-auto'/> }
+                        </div>
                 </div>
             )
         }
@@ -115,7 +114,10 @@ const ImageLoader: React.FC<Props> = ({
     return (
         <div
             className="border-2 border-dashed border-gray-300 bg-white rounded-2xl h-full w-full cursor-pointer text-5xl text-gray-200 font-bold">
-            {renderBrowseFileContent()}
+
+            <Loader loading={loading}>
+                {renderBrowseFileContent()}
+            </Loader>
 
             <input
                 ref={fileRef}

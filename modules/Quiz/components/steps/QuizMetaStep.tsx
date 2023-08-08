@@ -5,7 +5,7 @@ import TextInput from "@/components/input/TextInput";
 import {useInput} from "@/hooks/useInput";
 import Label from "@/components/Label";
 import TextareaInput from "@/components/input/TextareaInput";
-import {ImageLoader, ImgParams} from "@/modules/Image";
+import {ImageApi, ImageLoader, ImgParams} from "@/modules/Image";
 import Button from "@/components/Button";
 import {useCreateQuizStore} from "@/modules/Quiz/store/CreateQuizStore";
 import { required, maxLength } from "@/hooks/useValidation";
@@ -37,7 +37,7 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
         return (
             !nameInput.error
             && !descInput.error
-            && !!img.url
+            && !!img.id
         );
     }
 
@@ -51,10 +51,23 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
     }
 
     const onChangeImage = async (file: File) => {
+        const image = await ImageApi.createFile(file);
 
+        setImg(image);
+        setQuiz({...quiz, image_id: image.id})
     }
 
     const onDeleteImage = async (img: ImgParams) => {
+        if(img.id) {
+            const { success } = await ImageApi.deleteFile(img.id);
+
+            if(success) {
+                setImg({});
+                setQuiz({...quiz, image_id: undefined})
+            }
+
+            return { success };
+        }
 
         return { success: true }
     }
@@ -92,6 +105,7 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
                             setImg={setImg}
                             onChange={onChangeImage}
                             onDelete={onDeleteImage}
+                            preview={false}
                         />
                     </div>
 
