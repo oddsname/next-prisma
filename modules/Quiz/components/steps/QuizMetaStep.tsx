@@ -8,7 +8,7 @@ import TextareaInput from "@/components/input/TextareaInput";
 import {ImageApi, ImageLoader, ImgParams} from "@/modules/Image";
 import Button from "@/components/Button";
 import {useCreateQuizStore} from "@/modules/Quiz/store/CreateQuizStore";
-import { required, maxLength } from "@/hooks/useValidation";
+import {required, maxLength, useValidation, fileSize, isImage} from "@/hooks/useValidation";
 import ErrorMessage from "@/components/ErrorMessage";
 
 interface Props {
@@ -28,6 +28,12 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
         maxLength(500),
     ]);
 
+    const fileValidation = useValidation([
+        required("Image is required"),
+        isImage(),
+        fileSize( 200000 /* 200K kb*/),
+    ]);
+
     const [img, setImg] = useState<ImgParams>({id: quiz.image_id});
 
     useEffect(() => setNextButtonDisabled(true), [])
@@ -37,7 +43,7 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
         return (
             !nameInput.error
             && !descInput.error
-            && !!img.id
+            && !fileValidation.error
         );
     }
 
@@ -51,10 +57,13 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
     }
 
     const onChangeImage = async (file: File) => {
-        const image = await ImageApi.createFile(file);
+        const validation = fileValidation.validate(file);
+        if(validation) {
+            const image = await ImageApi.createFile(file);
 
-        setImg(image);
-        setQuiz({...quiz, image_id: image.id})
+            setImg(image);
+            setQuiz({...quiz, image_id: image.id})
+        }
     }
 
     const onDeleteImage = async (img: ImgParams) => {
@@ -62,6 +71,8 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
             const { success } = await ImageApi.deleteFile(img.id);
 
             if(success) {
+                //to show validation error
+                fileValidation.validate(null)
                 setImg({});
                 setQuiz({...quiz, image_id: undefined})
             }
@@ -107,6 +118,8 @@ const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
                             onDelete={onDeleteImage}
                             preview={false}
                         />
+
+                        <ErrorMessage>{fileValidation.error}</ErrorMessage>
                     </div>
 
                 </div>
