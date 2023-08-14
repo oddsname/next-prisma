@@ -14,7 +14,6 @@ import ErrorMessage from "@/components/ErrorMessage";
 interface Props {
     setNextButtonDisabled: (value: boolean) => void,
 }
-
 const QuizMetaStep: React.FC<Props> = ({ setNextButtonDisabled }) => {
     const { setQuiz, quiz } = useCreateQuizStore();
 
