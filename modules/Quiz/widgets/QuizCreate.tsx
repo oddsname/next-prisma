@@ -59,7 +59,7 @@ const QuizCreate: React.FC<Props> = ({quizTypes}) => {
     return (
         <div>
             <div className='h-full w-full'>
-                <StatusBar amount={stepsAmount} selected={step}/>
+                <StatusBar keys={[0, 1, 2]} selected={step}/>
 
                 <div className="mt-16">
                     <QuizCreateSteps

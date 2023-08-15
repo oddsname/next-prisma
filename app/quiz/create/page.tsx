@@ -1,5 +1,6 @@
 import {QuizCreate} from "@/modules/Quiz/index";
 import {prisma} from "@/prisma/prisma";
+import QuizAlternativeCreate from "@/modules/Quiz/widgets/QuizAlternativeCreate";
 
 export default async function Create() {
     const quizTypes = await prisma.quizType.findMany({
@@ -8,9 +9,11 @@ export default async function Create() {
 
     return (
         <>
-            <QuizCreate
-                quizTypes={quizTypes}
-            />
+            {/*<QuizCreate*/}
+            {/*    quizTypes={quizTypes}*/}
+            {/*/>*/}
+
+            <QuizAlternativeCreate quizTypes={quizTypes} />
         </>
     )
 }

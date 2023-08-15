@@ -1,8 +1,7 @@
 import Block from '@/components/Block'
 import TextHeader from '@/components/TextHeader'
-import {prisma} from '@/prisma/prisma'
 import {QuizSearch} from "@/modules/Quiz";
-import {TabSwitcher, TabContent, TabHeader} from "@/components/TabSwitcher";
+import {TabSwitcher, TabContent, TabHeader} from "@/components/compound/TabSwitcher";
 
 export default async function Home() {
     return (
